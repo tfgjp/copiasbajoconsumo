@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Argumentos: unidad de destino y espacio
+# Argumentos: unidad de destino y espacio. Destino parametrizado, y espacio viene dado en la llamada.
 UNIDAD_DESTINO="/mnt/unidadProyecto/"
 ESPACIO=$1
 
@@ -19,4 +19,4 @@ else
     exit 1 # Devuelve código de error 1
 fi
 
-exit 0 # Todo está bien, devuelve 0
+exit 0 # Finalización correcta
