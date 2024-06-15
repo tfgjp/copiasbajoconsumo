@@ -1,7 +1,7 @@
 #!/bin/bash
 
-# Verifica que se haya proporcionado la IP del dispositivo como parámetro
-# La IP del dispositivo se pasa como primer argumento del script
+#Parametrización:
+# La IP del dispositivo enchufe
 #IP_DISPOSITIVO="192.168.99.11"
 #UNIDADTRABAJO="/scripts/"
 
@@ -28,5 +28,5 @@ else
     echo "Dispositivo cifrado cerrado con éxito"
 fi
 
-#Instrucción de apagado del enchufe electrónico
+#Instrucción de apagado del enchufe smart
 ./hs100/hs100.sh off -i $IP_DISPOSITIVO
