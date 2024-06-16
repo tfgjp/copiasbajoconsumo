@@ -1,5 +1,5 @@
 #!/bin/bash
-
+# *********************************Para iniciar desde fuera *************************script en prueba RECURSIVO
 # Direcciones IP y parámetros
 IP_DESTINO="192.168.99.102"
 PUERTO_SSH="8022"
