@@ -11,7 +11,7 @@ if mountpoint -q "$UNIDAD_DESTINO" ; then
     # Verifica si existe la carpeta ESPACIO
     CARPETA_DESTINO="$UNIDAD_DESTINO$ESPACIO"
     if [ ! -d "$CARPETA_DESTINO" ]; then
-        echo "Carpeta $ESPACIO no existe en la unidad de destino. Creando carpeta..."
+        echo "Carpeta $ESPACIO no existe en la unidad de destino. "
 
     fi
 else
