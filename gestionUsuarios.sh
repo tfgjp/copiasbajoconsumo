@@ -1,11 +1,13 @@
 #!/bin/bash
 
-# Función para verificar si sdb1 está montada en /proyecto
+unidad_destino="${1:-sdb1}"  
+punto_montaje="${2:-/proyecto}"  
+# Función para verificar si la unidad está montada
 check_mount() {
-    if mountpoint -q /sdb1/proyecto; then
-        echo "La unidad sdb1 está montada en /proyecto."
+    if mountpoint -q "/$unidad_destino/$punto_montaje"; then
+        echo "La unidad $unidad_destino está montada en /$punto_montaje."
     else
-        echo "Error: la unidad sdb1 no está montada en /proyecto."
+        echo "Error: la unidad $unidad_destino no está montada en /$punto_montaje."
         exit 1
     fi
 }
