@@ -3,12 +3,12 @@
 #Parametrización:
 # La IP del dispositivo enchufe
 #IP_DISPOSITIVO="192.168.99.11"
-#UNIDADTRABAJO="/scripts/"
+
 
 IP_DISPOSITIVO="192.168.12.94"
-UNIDADTRABAJO="/scripts/proyecto"
 
-cd $UNIDADTRABAJO
+
+cd ~
 
 # Desmonta la unidad cifrada
 sudo umount /mnt/unidadProyecto/
