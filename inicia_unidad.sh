@@ -1,22 +1,28 @@
 #!/bin/bash
+# Parámetros
+IP_DISPOSITIVO="192.168.99.11"
+UNIDAD="/dev/sda"
+UNIDADTRABAJO="/scripts/"
 
-# Argumentos: unidad de destino y espacio. Destino parametrizado, y espacio viene dado en la llamada.
-UNIDAD_DESTINO="/mnt/unidadProyecto/"
-ESPACIO=$1
+cd $UNIDADTRABAJO
+# Enciende el dispositivo y espera porque tiene tarda unos segundos en funcionar.
+./hs100/hs100.sh on -i $IP_DISPOSITIVO
+sleep 10s
 
-# Verifica si la unidad de destino está montada
-if mountpoint -q "$UNIDAD_DESTINO" ; then
-    echo "Unidad de destino montada."
-
-    # Verifica si existe la carpeta ESPACIO
-    CARPETA_DESTINO="$UNIDAD_DESTINO$ESPACIO"
-    if [ ! -d "$CARPETA_DESTINO" ]; then
-        echo "Carpeta $ESPACIO no existe en la unidad de destino. Error"
-       
-    fi
+# Intenta montar la unidad y verifica si el montaje fue ok
+if grep /mnt/unidadCifrada /proc/mounts > /dev/null 2>&1; then
+    echo "unidadCifrada montada ....OK"
 else
-    echo "Error: La unidad de destino no está montada."
-    exit 1 # Devuelve código de error 1
-fi
+    echo "Montando unidadCifrada..."
+    sudo cat llave.key | sudo cryptsetup open --type luks $UNIDAD cifrada
+    sudo mount /dev/mapper/cifrada /mnt/unidadProyecto/
+    echo "unidadCifra montada"
 
-exit 0 # Finalización correcta
+    # Verifica nuevamente si la unidad está montada
+    if grep /mnt/unidadProyecto /proc/mounts > /dev/null 2>&1; then
+        echo "unidadCifra montada con éxito"
+    else
+        echo "Error: Fallo al montar unidadCifrada"
+        exit 1
+    fi
+fi
