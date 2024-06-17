@@ -2,10 +2,8 @@
 
 #Parametrización:
 # La IP del dispositivo enchufe
-#IP_DISPOSITIVO="192.168.99.11"
+IP_DISPOSITIVO="192.168.99.11"
 
-
-IP_DISPOSITIVO="192.168.12.94"
 
 
 cd ~
