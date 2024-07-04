@@ -1,9 +1,7 @@
-@echo off
-echo Iniciando script de backup
 REM Definiciones
 set USUARIO=project
 set IP_RASPBERRY=192.168.99.102
-set RUTA_LOCAL=/mnt/c/Users/estudio/Desktop/backup
+set RUTA_LOCAL=/mnt/c/Users/miwin/Desktop/backup
 set RUTA_DESTINO=/mnt/unidadProyecto/backup
 set PREFIJO= # En este caso a nulo.
 set ESPACIO="proyectodesdewin"
@@ -15,7 +13,7 @@ set RUTA_WSL=%RUTA_LOCAL:/=//%
 echo Iniciando conexión en Raspberry.
 :: Ejecuta inicia_unidad.sh en la Raspberry Pi
 wsl ssh %USUARIO%@%IP_RASPBERRY% " /scripts/inicia_unidad.sh"
-NOT %ERRORLEVEL% == 0 (
+IF %ERRORLEVEL% NEQ 0 (
     echo Error al iniciar la unidad en la Raspberry Pi.
     exit /b 1
 )
@@ -23,7 +21,7 @@ NOT %ERRORLEVEL% == 0 (
 echo Conectando con la unidad Raspberry....
 :: Ejecuta verificaMontajeYCarpeta.sh en la Raspberry Pi
 wsl ssh %USUARIO%@%IP_RASPBERRY% " /scripts/verificaMontajeYCarpeta.sh %ESPACIO%"
-NOT %ERRORLEVEL% == 0 (
+IF %ERRORLEVEL% NEQ 0 (
     echo Error al verificar montaje y carpeta en la Raspberry Pi.
     exit /b 1
 )
@@ -35,7 +33,7 @@ wsl rsync -avz %RUTA_WSL% %USUARIO%@%IP_RASPBERRY%:%RUTA_DESTINO%/%ESPACIO%
 :: Ejecuta finaliza_unidad.sh en la Raspberry Pi
 echo Se procede a apagar la unidad USB.
 wsl ssh %USUARIO%@%IP_RASPBERRY% " /scripts/finaliza_unidad.sh"
-NOT %ERRORLEVEL% == 0 (
+IF %ERRORLEVEL% NEQ 0 (
     echo Error al finalizar la unidad en la Raspberry Pi.
     exit /b 1
 )
