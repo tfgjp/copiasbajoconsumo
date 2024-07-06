@@ -4,26 +4,34 @@
 IP_RASPBERRY="192.168.99.102"
 
 # Usuario en la Raspberry
-# requiere ser el usuario creado mediante gestionUsuarios.sh
-# requiere la copia de la clave id_rsa para acceder por ssh de forma automatizada
-USUARIO="project"
+prefijo="nuevouser/"
+USUARIO="nuevouser"
 
 
 # Ruta local a respaldar
-RUTA_LOCAL="/RUTA A RESPALDAR"
+RUTA_LOCAL="/home/estudio/Escritorio/otroUser"
 # Espacio en la Raspberry Pi donde se almacenará el respaldo
 ESPACIO="backupProyecto"
-prefijo="proyecto/"
+
+
+
+# Archivo de log
+LOG_FILE="logfile.log"
+
+# Redirige stdout y stderr al archivo de log
+exec > >(tee -a "$LOG_FILE") 2>&1
+
+echo "Inicio del script: $(date)"
 
 # Ejecuta inicia_unidad.sh en la Raspberry Pi
-ssh ${USUARIO}@${IP_RASPBERRY} " /scripts/${prefijo}inicia_unidad.sh"
+ssh ${USUARIO}@${IP_RASPBERRY} " /scripts/inicia_unidad.sh"
 if [ $? -ne 0 ]; then
     echo "Error al iniciar la unidad en la Raspberry Pi."
     exit 1
 fi
 
 # Ejecuta verificaMontajeYCarpeta.sh en la Raspberry Pi
-ssh ${USUARIO}@${IP_RASPBERRY} " /scripts/${prefijo}verificaMontajeYCarpeta.sh ${ESPACIO}"
+ssh ${USUARIO}@${IP_RASPBERRY} " /scripts/verificaMontajeYCarpeta.sh ${ESPACIO}"
 if [ $? -ne 0 ]; then
     echo "Error al verificar montaje y carpeta en la Raspberry Pi."
     exit 1
@@ -41,8 +49,10 @@ if [ $? -ne 0 ]; then
 fi
 
 # Ejecuta finaliza_unidad.sh en la Raspberry Pi
-ssh ${USUARIO}@${IP_RASPBERRY} " /scripts/${prefijo}finaliza_unidad.sh"
+ssh ${USUARIO}@${IP_RASPBERRY} " /scripts/finaliza_unidad.sh"
 if [ $? -ne 0 ]; then
     echo "Error al finalizar la unidad montada en la Raspberry Pi."
     exit 1
 fi
+
+echo "Fin del script: $(date)"
