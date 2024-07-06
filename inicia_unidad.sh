@@ -14,7 +14,7 @@ if grep /mnt/unidadCifrada /proc/mounts > /dev/null 2>&1; then
     echo "unidadCifrada montada ....OK"
 else
     echo "Montando unidadCifrada..."
-    sudo cat llave.key | sudo cryptsetup open --type luks $UNIDAD cifrada
+    cat llave.key | sudo cryptsetup open --type luks $UNIDAD cifrada
     sudo mount /dev/mapper/cifrada /mnt/unidadProyecto/
     echo "unidadCifra montada"
 
