@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Requisito: la unidad tiene que estar inciada.
+# ejecute inicia_unidad.sh
 
 unidad_destino="${1:-mnt/unidadProyecto}"  
 usuario="${2:-}"  
