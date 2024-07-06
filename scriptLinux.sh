@@ -1,14 +1,16 @@
 #!/bin/bash
 
 # Dirección IP de la Raspberry.
-IP_RASPBERRY="192.168.99.101"
+IP_RASPBERRY="192.168.99.102"
 
 # Usuario en la Raspberry
+# requiere ser el usuario creado mediante gestionUsuarios.sh
+# requiere la copia de la clave id_rsa para acceder por ssh de forma automatizada
 USUARIO="project"
 
 
 # Ruta local a respaldar
-RUTA_LOCAL="/mnt/sambito/unidadw/Estudio/Proyecto"
+RUTA_LOCAL="/RUTA A RESPALDAR"
 # Espacio en la Raspberry Pi donde se almacenará el respaldo
 ESPACIO="backupProyecto"
 prefijo="proyecto/"
