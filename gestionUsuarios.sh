@@ -3,14 +3,14 @@
 # Requisito: la unidad tiene que estar inciada.
 # ejecute inicia_unidad.sh
 
-unidad_destino="${1:-mnt/unidadProyecto}"  
+unidad_destino="${1:-/mnt/unidadProyecto}"  
 usuario="${2:-}"  
 
 # Función para verificar si la unidad está montada
 check_mount() {
     if [ -z "$usuario" ]; then
         # Verificar solo la unidad si el nombre de usuario está vacío
-        if mountpoint -q "/$unidad_destino"; then
+        if mountpoint -q "$unidad_destino"; then
             echo "La unidad $unidad_destino está montada."
         else
             echo "Error: la unidad $unidad_destino no está montada."
@@ -19,7 +19,7 @@ check_mount() {
     else
         # Verificar la unidad y el punto de montaje del usuario si se proporciona el nombre de usuario
         punto_montaje="$unidad_destino/$usuario"
-        if mountpoint -q "/$punto_montaje"; then
+        if mountpoint -q "$punto_montaje"; then
             echo "La unidad $unidad_destino está montada en /$punto_montaje."
         else
             echo "Error: la unidad $unidad_destino no está montada en /$punto_montaje."
