@@ -1,6 +1,7 @@
 #!/bin/bash
 
 # Script para Android
+# recibe el nombre porque copia la carpeta de la cámara
 # Dirección IP de la Raspberry
 IP_RASPBERRY="192.168.99.102"
 # Usuario en la Raspberry 
