@@ -11,7 +11,7 @@ USUARIO="nuevouser"
 # Ruta local a respaldar
 RUTA_LOCAL="/home/estudio/Escritorio/otroUser"
 # Espacio en la Raspberry Pi donde se almacenará el respaldo
-ESPACIO="backupProyecto"
+ESPACIO=$prefijo
 
 
 
@@ -38,9 +38,7 @@ if [ $? -ne 0 ]; then
 fi
 
 # Ejecuta rsync para hacer el respaldo en la Raspberry Pi
- rsync -avr --progress ${RUTA_LOCAL} ${USUARIO}@${IP_RASPBERRY}:/mnt/unidadProyecto/${ESPACIO}/  > resultado
-resultado=$(cat resultado)
-cat resultado
+ rsync -avr --progress ${RUTA_LOCAL} ${USUARIO}@${IP_RASPBERRY}:/mnt/unidadProyecto/${ESPACIO}/  
 
 
 if [ $? -ne 0 ]; then
